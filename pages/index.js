@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Head from "next/head";
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import {
@@ -12,37 +12,45 @@ import {
   Stack
 } from '@chakra-ui/react';
 import LincTreeIcon from '@/components/LincTree';
+import Container from '@/components/Container';
 
 const Home = () => {
   const router = useRouter();
   return (
     <>
-    <Head>
-      <title>Linctree | The Only Link You’ll Ever Need. </title>
-    </Head>
-    <Box bg="gray.50" py={8} px={4} minH="100vh">
-      <Flex direction="column" maxW="1280px" margin="0 auto">
+      <Head>
+        <title>Linctree | The Only Link You’ll Ever Need. </title>
+      </Head>
+      <Container>
         <Flex alignItems="center" justifyContent="space-between">
           <LincTreeIcon />
           <Stack direction="row" spacing={4}>
             <ChakraLink as={Link} href="/login">
-              Log in
-            </ChakraLink>
-            <ChakraLink as={Link} href="/register">
-              Register
+              Sign in
             </ChakraLink>
           </Stack>
         </Flex>
         <Flex direction="column" alignItems="center" mt={16} py={16}>
-          <Heading color="gray.800" textAlign="center" width={["250px", "auto"]}>The Only Link You’ll Ever Need</Heading>
-          <Text mt={3} color="gray.600"  textAlign="center" width={["300px", "auto"]}>
+          <Heading
+            color="gray.800"
+            textAlign="center"
+            width={['250px', 'auto']}
+          >
+            The Only Link You’ll Ever Need
+          </Heading>
+          <Text
+            mt={3}
+            color="gray.600"
+            textAlign="center"
+            width={['300px', 'auto']}
+          >
             Connect audiences to all of your content with just one link
           </Text>
           <Button
             colorScheme="whatsapp"
             my={6}
             onClick={() => {
-              router.push('/register');
+              router.push('/login');
             }}
           >
             Get started for Free
@@ -74,8 +82,7 @@ const Home = () => {
             />
           </Flex>
         </Flex>
-      </Flex>
-    </Box>
+      </Container>
     </>
   );
 };

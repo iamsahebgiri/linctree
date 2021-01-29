@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Head from "next/head";
 import { useRouter } from 'next/router';
 
 import {
@@ -15,7 +16,11 @@ import LincTreeIcon from '@/components/LincTree';
 const Home = () => {
   const router = useRouter();
   return (
-    <Box bg="gray.100" py={8} px={4} minH="100vh">
+    <>
+    <Head>
+      <title>Linctree | The Only Link You’ll Ever Need. </title>
+    </Head>
+    <Box bg="gray.50" py={8} px={4} minH="100vh">
       <Flex direction="column" maxW="1280px" margin="0 auto">
         <Flex alignItems="center" justifyContent="space-between">
           <LincTreeIcon />
@@ -29,13 +34,13 @@ const Home = () => {
           </Stack>
         </Flex>
         <Flex direction="column" alignItems="center" mt={16} py={16}>
-          <Heading color="gray.800" textAlign="center">The Only Link You’ll Ever Need</Heading>
-          <Text mt={3} color="gray.600"  textAlign="center">
+          <Heading color="gray.800" textAlign="center" width={["250px", "auto"]}>The Only Link You’ll Ever Need</Heading>
+          <Text mt={3} color="gray.600"  textAlign="center" width={["300px", "auto"]}>
             Connect audiences to all of your content with just one link
           </Text>
           <Button
             colorScheme="whatsapp"
-            mt={6}
+            my={6}
             onClick={() => {
               router.push('/register');
             }}
@@ -65,12 +70,13 @@ const Home = () => {
               width="100%"
               borderRadius="30px"
               backgroundSize="cover"
-              bg="url('https://cdn57.androidauthority.net/wp-content/uploads/2020/10/iPhone-12-Orb-Blue-Light.jpg')"
+              bg="url('/assets/iPhone-12-Orb-Blue-Light.jpg')"
             />
           </Flex>
         </Flex>
       </Flex>
     </Box>
+    </>
   );
 };
 

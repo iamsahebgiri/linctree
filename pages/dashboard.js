@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import {
   Avatar,
   Box,
   Button,
   Flex,
+  Link,
   Menu,
   MenuButton,
   MenuGroup,
   MenuItem,
-  MenuList
+  MenuList,
+  Icon
 } from '@chakra-ui/react';
 import { FcSettings, FcStackOfPhotos, FcLink } from 'react-icons/fc';
+import { HiOutlineExternalLink } from 'react-icons/hi';
 import { LincTreeFavIcon } from '@/components/LincTree';
-import { Text } from '@chakra-ui/react';
 import NavItem from '@/components/NavItem';
+import PhoneMockup from '@/components/PhoneMockup';
 
 const Dashboard = (props) => {
-  const router = useRouter();
   const navs = [
     {
       name: 'Links',
@@ -39,52 +40,32 @@ const Dashboard = (props) => {
     <Box>
       <Flex position="fixed">
         <Flex
-          width="64px"
-          flexDir="column"
+          width={['100vw', '64px']}
+          flexDir={['row', 'column']}
           py="4"
-          height="100vh"
+          px={['4', 0]}
+          height={['64px', '100vh']}
           bg="gray.800"
           alignItems="center"
           justifyContent="space-between"
         >
           <LincTreeFavIcon h={8} width={8} />
-          <Menu offset={[40, -30]}>
+          <Menu>
             <MenuButton>
-              <Avatar
-                size="sm"
-                name="Dan Abrahmov"
-                fallbackSrc="https://via.placeholder.com/100/000000/FFFFFF/"
-                src={`http://localhost:3030/?.profilePicture}`}
-              />
+              <Avatar size="sm" name="Amit Sahu" src="" />
             </MenuButton>
             <MenuList>
               <MenuGroup title="Account">
-                <MenuItem
-                  fontSize="sm"
-                  onClick={() => {
-                    router.push('/admin/account');
-                  }}
-                >
-                  Settings
-                </MenuItem>
-                <MenuItem
-                  fontSize="sm"
-                  onClick={() => {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('user');
-                    router.push('/login');
-                  }}
-                >
-                  Sign Out
-                </MenuItem>
+                <MenuItem fontSize="sm">Settings</MenuItem>
+                <MenuItem fontSize="sm">Sign Out</MenuItem>
               </MenuGroup>
             </MenuList>
           </Menu>
         </Flex>
       </Flex>
 
-      <Flex ml="64px" minH="100vh" bg="gray.50">
-        <Box width="58%">
+      <Flex ml={[0, '64px']} mt={['64px', 0]} minH="100vh" bg="gray.50">
+        <Box width={['100%', '100%', '58%']}>
           <Flex bg="white" shadow="sm" px={2} pt={2}>
             {navs.map((nav) => (
               <NavItem key={nav.href} nav={nav}>
@@ -92,9 +73,42 @@ const Dashboard = (props) => {
               </NavItem>
             ))}
           </Flex>
+          <Flex>{props.children}</Flex>
         </Box>
-        <Box width="42%" bg="teal.300">
-          there
+        <Box
+          width={['0', '42%']}
+          bg="white"
+          display={['none', 'none', 'block']}
+        >
+          <Flex
+            bg="white"
+            shadow="sm"
+            py={2}
+            px={6}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Link
+              fontSize="sm"
+              color="gray.600"
+              href="https://chakra-ui.com"
+              isExternal
+            >
+              https://linctree.now.sh/iamsahebgiri
+              <Icon as={HiOutlineExternalLink} mx="6px" />
+            </Link>
+            <Button
+              color="gray.900"
+              variant="outline"
+              fontSize="sm"
+              fontWeight="normal"
+            >
+              Share
+            </Button>
+          </Flex>
+          <Flex justifyContent="center" py={6}>
+            <PhoneMockup />
+          </Flex>
         </Box>
       </Flex>
     </Box>

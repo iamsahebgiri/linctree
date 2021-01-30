@@ -1,117 +1,30 @@
-import React, { useEffect } from 'react';
-import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  Link,
-  Menu,
-  MenuButton,
-  MenuGroup,
-  MenuItem,
-  MenuList,
-  Icon
-} from '@chakra-ui/react';
-import { FcSettings, FcStackOfPhotos, FcLink } from 'react-icons/fc';
-import { HiOutlineExternalLink } from 'react-icons/hi';
-import { LincTreeFavIcon } from '@/components/LincTree';
-import NavItem from '@/components/NavItem';
-import PhoneMockup from '@/components/PhoneMockup';
+import { Button, Flex, Box, Stack } from '@chakra-ui/react';
+import DashboardShell from '@/components/DashboardShell';
+import DraggableLinks from '@/components/DraggableLinks';
 
-const Dashboard = (props) => {
-  const navs = [
-    {
-      name: 'Links',
-      icon: FcLink,
-      href: 'dashboard'
-    },
-    {
-      name: 'Appearance',
-      icon: FcStackOfPhotos,
-      href: 'appearance'
-    },
-    {
-      name: 'Settings',
-      icon: FcSettings,
-      href: 'settings'
-    }
-  ];
+const DataFromBackend = [
+  { id: 'gzm10coxqss', name: 'Facebook' },
+  { id: 'u3nir51t8hk', name: 'Google' },
+  { id: 'cvmyi5bkfj5', name: 'Github' },
+  { id: '9ailtmuoa58', name: 'Reddit' },
+  { id: 'if8r6fvt9j', name: 'Youtube' },
+  { id: 'k5tjew3uf5n', name: 'Linkedin' }
+];
+
+const Dashboard = () => {
   return (
-    <Box>
-      <Flex position="fixed">
-        <Flex
-          width={['100vw', '64px']}
-          flexDir={['row', 'column']}
-          py="4"
-          px={['4', 0]}
-          height={['64px', '100vh']}
-          bg="gray.800"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <LincTreeFavIcon h={8} width={8} />
-          <Menu>
-            <MenuButton>
-              <Avatar size="sm" name="Amit Sahu" src="" />
-            </MenuButton>
-            <MenuList>
-              <MenuGroup title="Account">
-                <MenuItem fontSize="sm">Settings</MenuItem>
-                <MenuItem fontSize="sm">Sign Out</MenuItem>
-              </MenuGroup>
-            </MenuList>
-          </Menu>
+    <DashboardShell>
+      <Flex p={[2, 6]}>
+        <Flex width={['100%', 'md']} margin="0 auto" direction="column">
+          <Button isFullWidth colorScheme="whatsapp" mb={[2, 6]}>
+            Add New Link
+          </Button>
+          <Box>
+            <DraggableLinks data={DataFromBackend} />
+          </Box>
         </Flex>
       </Flex>
-
-      <Flex ml={[0, '64px']} mt={['64px', 0]} minH="100vh" bg="gray.50">
-        <Box width={['100%', '100%', '58%']}>
-          <Flex bg="white" shadow="sm" px={2} pt={2}>
-            {navs.map((nav) => (
-              <NavItem key={nav.href} nav={nav}>
-                {nav.name}
-              </NavItem>
-            ))}
-          </Flex>
-          <Flex>{props.children}</Flex>
-        </Box>
-        <Box
-          width={['0', '42%']}
-          bg="white"
-          display={['none', 'none', 'block']}
-        >
-          <Flex
-            bg="white"
-            shadow="sm"
-            py={2}
-            px={6}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Link
-              fontSize="sm"
-              color="gray.600"
-              href="https://chakra-ui.com"
-              isExternal
-            >
-              https://linctree.now.sh/iamsahebgiri
-              <Icon as={HiOutlineExternalLink} mx="6px" />
-            </Link>
-            <Button
-              color="gray.900"
-              variant="outline"
-              fontSize="sm"
-              fontWeight="normal"
-            >
-              Share
-            </Button>
-          </Flex>
-          <Flex justifyContent="center" py={6}>
-            <PhoneMockup />
-          </Flex>
-        </Box>
-      </Flex>
-    </Box>
+    </DashboardShell>
   );
 };
 

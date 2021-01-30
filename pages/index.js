@@ -4,12 +4,11 @@ import { useRouter } from 'next/router';
 
 import {
   Button,
-  Heading,
-  Text,
-  Box,
   Flex,
+  Heading,
   Link as ChakraLink,
-  Stack
+  Stack,
+  Text
 } from '@chakra-ui/react';
 import LincTreeIcon from '@/components/LincTree';
 import Container from '@/components/Container';

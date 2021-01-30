@@ -67,7 +67,7 @@ const DashboardShell = (props) => {
         </Flex>
       </Flex>
 
-      <Flex ml={[0, '64px']} mt={['64px', 0]} minH="100vh" bg="gray.50">
+      <Flex ml={[0, '64px']} mt={['64px', 0]} minH="100vh" bg="gray.100">
         <Box width={['100%', '100%', '58%']}>
           <Flex bg="white" shadow="sm" px={2} pt={2}>
             {navs.map((nav) => (

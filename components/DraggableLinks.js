@@ -1,5 +1,13 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Box, Text, Icon, IconButton, Link, Flex } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Icon,
+  IconButton,
+  Link,
+  Flex,
+  Divider
+} from '@chakra-ui/react';
 import { HiLink, HiOutlineTrash } from 'react-icons/hi';
 import EditableTextField from './EditableTextField';
 
@@ -51,21 +59,23 @@ const DraggableLinks = ({ state, setState }) => {
                         fontSize="lg"
                         defaultValue={item.name}
                         placeholder="Example"
+                        color="gray.800"
                       />
                       <Flex mt={2} alignItems="center">
-                        <Icon as={HiLink} />
+                        <Icon as={HiLink} color="gray.600" />
                         <EditableTextField
                           fontSize="sm"
                           ml={3}
                           width="100%"
                           placeholder="https://www.example.com"
+                          color="gray.600"
                         />
                       </Flex>
-                      <Flex justifyContent="flex-end">
+                      <Flex justifyContent="flex-end" mt={2}>
                         <IconButton
                           aria-label="icon"
                           icon={<Icon as={HiOutlineTrash} h={5} w={5} />}
-                          size="md"
+                          size="sm"
                           variant="ghost"
                           colorScheme="red"
                         />

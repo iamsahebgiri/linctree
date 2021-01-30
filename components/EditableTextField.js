@@ -25,7 +25,7 @@ const EditableTextField = (props) => {
         />
       </ButtonGroup>
     ) : (
-      <Flex ml={1}>
+      <Flex>
         <IconButton
           size="sm"
           icon={<Icon as={HiPencil} />}
@@ -38,7 +38,7 @@ const EditableTextField = (props) => {
   return (
     <Editable {...props} isPreviewFocusable={false} submitOnBlur={false}>
       {(props) => (
-        <Flex>
+        <Flex justifyContent="space-between">
           <EditablePreview />
           <EditableInput _focus={{ boxShadow: 0 }} />
           <EditableControls {...props} />

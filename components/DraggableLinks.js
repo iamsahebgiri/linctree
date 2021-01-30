@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Box } from '@chakra-ui/react';
+import { Box, Text, Icon, IconButton, Link, Flex } from '@chakra-ui/react';
+import { HiLink, HiOutlineTrash } from 'react-icons/hi';
+import EditableTextField from './EditableTextField';
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -9,9 +10,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const DraggableLinks = ({ data }) => {
-  const [state, setState] = useState(data);
-
+const DraggableLinks = ({ state, setState }) => {
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -41,14 +40,36 @@ const DraggableLinks = ({ data }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       key={item.id}
-                      h="100px"
-                      p={2}
+                      p={[3, 5]}
                       mb={3}
                       bg="white"
                       rounded="md"
                       shadow={snapshot.isDragging ? 'md' : 'sm'}
                     >
-                      {item.name}
+                      <EditableTextField
+                        fontWeight="bold"
+                        fontSize="lg"
+                        defaultValue={item.name}
+                        placeholder="Example"
+                      />
+                      <Flex mt={2} alignItems="center">
+                        <Icon as={HiLink} />
+                        <EditableTextField
+                          fontSize="sm"
+                          ml={3}
+                          width="100%"
+                          placeholder="https://www.example.com"
+                        />
+                      </Flex>
+                      <Flex justifyContent="flex-end">
+                        <IconButton
+                          aria-label="icon"
+                          icon={<Icon as={HiOutlineTrash} h={5} w={5} />}
+                          size="md"
+                          variant="ghost"
+                          colorScheme="red"
+                        />
+                      </Flex>
                     </Box>
                   )}
                 </Draggable>

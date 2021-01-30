@@ -39,7 +39,7 @@ const DashboardShell = (props) => {
   ];
   return (
     <Box>
-      <Flex position="fixed">
+      <Flex position="fixed" zIndex={3}>
         <Flex
           width={['100vw', '64px']}
           flexDir={['row', 'column']}

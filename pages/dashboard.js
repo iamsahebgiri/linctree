@@ -1,26 +1,45 @@
-import { Button, Flex, Box, Stack } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Button, Flex, Box, Icon } from '@chakra-ui/react';
+import { HiOutlinePlus } from 'react-icons/hi';
 import DashboardShell from '@/components/DashboardShell';
 import DraggableLinks from '@/components/DraggableLinks';
 
 const DataFromBackend = [
-  { id: 'gzm10coxqss', name: 'Facebook' },
   { id: 'u3nir51t8hk', name: 'Google' },
-  { id: 'cvmyi5bkfj5', name: 'Github' },
-  { id: '9ailtmuoa58', name: 'Reddit' },
-  { id: 'if8r6fvt9j', name: 'Youtube' },
-  { id: 'k5tjew3uf5n', name: 'Linkedin' }
+  { id: 'cvmyi5bkfj5', name: 'Github' }
 ];
 
 const Dashboard = () => {
+  const [state, setState] = useState(DataFromBackend);
+
   return (
     <DashboardShell>
       <Flex p={[2, 6]}>
-        <Flex width={['100%', 'md']} margin="0 auto" direction="column">
-          <Button isFullWidth colorScheme="whatsapp" mb={[2, 6]}>
-            Add New Link
-          </Button>
+        <Flex width={['100%']} margin="0 auto" direction="column">
+          <Flex p={3} direction="row-reverse">
+            <Button
+              leftIcon={<Icon as={HiOutlinePlus} />}
+              colorScheme="whatsapp"
+              ml={4}
+              mb={[2, 6]}
+              onClick={() => {
+                setState((state) => [
+                  ...state,
+                  {
+                    id: Math.random().toString(36).slice(2),
+                    name: 'Saheb Giri'
+                  }
+                ]);
+              }}
+            >
+              Add New Link
+            </Button>
+            <Button variant="outline" mb={[2, 6]} onClick={() => {}}>
+              Save
+            </Button>
+          </Flex>
           <Box>
-            <DraggableLinks data={DataFromBackend} />
+            <DraggableLinks state={state} setState={setState} />
           </Box>
         </Flex>
       </Flex>

@@ -78,6 +78,12 @@ const DraggableLinks = ({ state, setState }) => {
                           size="sm"
                           variant="ghost"
                           colorScheme="red"
+                          onClick={() => {
+                            const newState = [...state];
+                            setState(
+                              newState.filter((_, idx) => idx !== index)
+                            );
+                          }}
                         />
                       </Flex>
                     </Box>

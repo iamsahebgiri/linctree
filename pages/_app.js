@@ -1,8 +1,9 @@
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from '@chakra-ui/react';
 import { Global, css } from '@emotion/react';
 import Head from 'next/head';
 
 import customTheme from '@/styles/theme';
+import { AuthProvider } from '@/lib/auth';
 
 const GlobalStyle = ({ children }) => {
   return (
@@ -31,8 +32,10 @@ const GlobalStyle = ({ children }) => {
 const App = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={customTheme}>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <AuthProvider>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </AuthProvider>
     </ChakraProvider>
   );
 };

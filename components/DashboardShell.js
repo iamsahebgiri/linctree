@@ -18,8 +18,11 @@ import { HiOutlineExternalLink } from 'react-icons/hi';
 import { LincTreeFavIcon } from '@/components/LincTree';
 import NavItem from '@/components/NavItem';
 import PhoneMockup from '@/components/PhoneMockup';
+import { useAuth } from '@/lib/auth';
 
 const DashboardShell = (props) => {
+  const auth = useAuth();
+
   const navs = [
     {
       name: 'Links',
@@ -39,7 +42,7 @@ const DashboardShell = (props) => {
   ];
   return (
     <Box>
-      <Flex position="fixed" zIndex={3}>
+      <Flex position="fixed" zIndex={1}>
         <Flex
           width={['100vw', '64px']}
           flexDir={['row', 'column']}
@@ -53,13 +56,19 @@ const DashboardShell = (props) => {
           <LincTreeFavIcon h={8} width={8} />
           <Menu>
             <MenuButton>
-              <Avatar size="sm" name="Amit Sahu" src="" />
+              <Avatar
+                size="sm"
+                name={auth?.user?.name}
+                src={auth?.user?.photoUrl}
+              />
             </MenuButton>
             <Portal>
               <MenuList>
                 <MenuGroup title="Account">
                   <MenuItem fontSize="sm">Settings</MenuItem>
-                  <MenuItem fontSize="sm">Sign Out</MenuItem>
+                  <MenuItem fontSize="sm" onClick={() => auth.signout()}>
+                    Sign Out
+                  </MenuItem>
                 </MenuGroup>
               </MenuList>
             </Portal>
@@ -76,7 +85,9 @@ const DashboardShell = (props) => {
               </NavItem>
             ))}
           </Flex>
-          <Box>{props.children}</Box>
+          <Box>
+            <Flex p={[2, 6]}>{props.children}</Flex>
+          </Box>
         </Box>
         <Box
           width={['0', '42%']}

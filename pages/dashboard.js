@@ -14,34 +14,32 @@ const Dashboard = () => {
 
   return (
     <DashboardShell>
-      <Flex p={[2, 6]}>
-        <Flex width={['100%']} margin="0 auto" direction="column">
-          <Flex p={3} direction="row-reverse">
-            <Button
-              leftIcon={<Icon as={HiOutlinePlus} />}
-              colorScheme="whatsapp"
-              ml={4}
-              mb={[2, 6]}
-              onClick={() => {
-                setState((state) => [
-                  ...state,
-                  {
-                    id: Math.random().toString(36).slice(2),
-                    name: 'Saheb Giri'
-                  }
-                ]);
-              }}
-            >
-              Add New Link
-            </Button>
-            <Button variant="outline" mb={[2, 6]} onClick={() => {}}>
-              Save
-            </Button>
-          </Flex>
-          <Box>
-            <DraggableLinks state={state} setState={setState} />
-          </Box>
+      <Flex width={['100%']} margin="0 auto" direction="column">
+        <Flex p={3} direction="row-reverse">
+          <Button
+            leftIcon={<Icon as={HiOutlinePlus} />}
+            colorScheme="whatsapp"
+            ml={4}
+            mb={[2, 6]}
+            onClick={() => {
+              setState((state) => [
+                ...state,
+                {
+                  id: Math.random().toString(36).slice(2),
+                  name: 'Saheb Giri'
+                }
+              ]);
+            }}
+          >
+            Add New Link
+          </Button>
+          <Button variant="outline" mb={[2, 6]} onClick={() => {}}>
+            Save
+          </Button>
         </Flex>
+        <Box>
+          <DraggableLinks state={state} setState={setState} />
+        </Box>
       </Flex>
     </DashboardShell>
   );

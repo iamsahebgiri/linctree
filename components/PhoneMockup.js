@@ -13,7 +13,7 @@ const PhoneMockup = () => {
       <Box
         position="absolute"
         bg="black"
-        width="200px"
+        width="180px"
         height="30px"
         borderRadius="0px 0px 20px 20px"
       />
@@ -23,7 +23,14 @@ const PhoneMockup = () => {
         borderRadius="30px"
         backgroundSize="cover"
         bg="url('/assets/iPhone-12-Orb-Blue-Light.jpg')"
-      />
+      >
+        <iframe
+          src="/default.asp"
+          width="100%"
+          height="100%"
+          style={{borderRadius: "30px"}}
+        ></iframe>
+      </Box>
     </Flex>
   );
 };

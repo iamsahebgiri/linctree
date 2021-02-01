@@ -120,7 +120,7 @@ const DashboardShell = (props) => {
               Share
             </Button>
           </Flex>
-          <Flex justifyContent="center" py={6}>
+          <Flex justifyContent="center" p={6}>
             <PhoneMockup />
           </Flex>
         </Box>

@@ -1,6 +1,6 @@
 import { Flex, Box } from '@chakra-ui/react';
 
-const PhoneMockup = () => {
+const PhoneMockup = ({ loadIframe = false }) => {
   return (
     <Flex
       width="320px"
@@ -24,12 +24,15 @@ const PhoneMockup = () => {
         backgroundSize="cover"
         bg="url('/assets/iPhone-12-Orb-Blue-Light.jpg')"
       >
-        <iframe
-          src="/default.asp"
-          width="100%"
-          height="100%"
-          style={{borderRadius: "30px"}}
-        ></iframe>
+        {loadIframe && (
+          <iframe
+            src="/default.asp"
+            width="100%"
+            height="100%"
+            style={{ borderRadius: '30px' }}
+            loading="lazy"
+          ></iframe>
+        )}
       </Box>
     </Flex>
   );

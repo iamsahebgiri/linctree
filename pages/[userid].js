@@ -13,22 +13,22 @@ import { useRouter } from 'next/router';
 const links = [
   {
     id: Math.random().toString(36).slice(2),
-    name: 'Github',
+    provider: 'Github',
     href: 'https://github.com/iamsahebgiri'
   },
   {
     id: Math.random().toString(36).slice(2),
-    name: 'Linkedin',
+    provider: 'Linkedin',
     href: 'https://linkedin.com/in/iamsahebgiri'
   },
   {
     id: Math.random().toString(36).slice(2),
-    name: 'Instagram',
+    provider: 'Instagram',
     href: 'https://instagram.com/iamsahebgiri'
   },
   {
     id: Math.random().toString(36).slice(2),
-    name: 'Twitter',
+    provider: 'Twitter',
     href: 'https://twitter.com/iamsahebgiri'
   }
 ];
@@ -83,7 +83,7 @@ const UserProfile = () => {
               >
                 <Flex justifyContent="center">
                   <Text fontWeight="medium" fontSize="sm">
-                    {link.name}
+                    {link.provider}
                   </Text>
                 </Flex>
               </Link>

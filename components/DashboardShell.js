@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Flex,
@@ -56,10 +55,14 @@ const DashboardShell = (props) => {
           <LincTreeFavIcon h={8} width={8} />
           <Menu>
             <MenuButton>
-              <Avatar
-                size="sm"
-                name={auth?.user?.name}
+              <img
+                style={{
+                  borderRadius: '25px'
+                }}
+                height="40px"
+                width="40px"
                 src={auth?.user?.photoUrl}
+                alt={auth?.user?.name}
               />
             </MenuButton>
             <Portal>
@@ -121,7 +124,7 @@ const DashboardShell = (props) => {
             </Button>
           </Flex>
           <Flex justifyContent="center" p={6}>
-            <PhoneMockup />
+            <PhoneMockup loadIframe />
           </Flex>
         </Box>
       </Flex>

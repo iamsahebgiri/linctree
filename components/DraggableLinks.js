@@ -1,13 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import {
-  Box,
-  Text,
-  Icon,
-  IconButton,
-  Link,
-  Flex,
-  Divider
-} from '@chakra-ui/react';
+import { Box, Icon, IconButton, Flex } from '@chakra-ui/react';
 import { HiLink, HiOutlineTrash } from 'react-icons/hi';
 import EditableTextField from './EditableTextField';
 
@@ -30,6 +22,19 @@ const DraggableLinks = ({ state, setState }) => {
     const items = reorder(state, result.source.index, result.destination.index);
     setState(items);
   };
+
+  const onSubmitEditableTextField = (nextString, index, type) => {
+    const newState = state.map((element, idx) => {
+      if (idx === index) {
+        const newLink = { ...element };
+        newLink[type] = nextString;
+        return newLink;
+      }
+      return element;
+    });
+    setState(newState);
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list">
@@ -57,9 +62,16 @@ const DraggableLinks = ({ state, setState }) => {
                       <EditableTextField
                         fontWeight="bold"
                         fontSize="lg"
-                        defaultValue={item.name}
+                        defaultValue={item.provider}
                         placeholder="Example"
                         color="gray.800"
+                        onSubmit={(provider) => {
+                          onSubmitEditableTextField(
+                            provider,
+                            index,
+                            'provider'
+                          );
+                        }}
                       />
                       <Flex mt={2} alignItems="center">
                         <Icon as={HiLink} color="gray.600" />
@@ -67,8 +79,12 @@ const DraggableLinks = ({ state, setState }) => {
                           fontSize="sm"
                           ml={3}
                           width="100%"
+                          defaultValue={item.href}
                           placeholder="https://www.example.com"
                           color="gray.600"
+                          onSubmit={(href) =>
+                            onSubmitEditableTextField(href, index, 'href')
+                          }
                         />
                       </Flex>
                       <Flex justifyContent="flex-end" mt={2}>

@@ -19,7 +19,7 @@ import { updateLinks } from '@/lib/db';
 
 
 const Dashboard = () => {
-  const [state, setState] = useState(DataFromBackend);
+  const [state, setState] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const auth = useAuth();
   const toast = useToast();

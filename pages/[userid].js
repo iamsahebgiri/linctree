@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import LincTreeIcon from '@/components/LincTree';
 import {
   Avatar,
@@ -9,6 +10,7 @@ import {
   Link
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { getUserByUsername } from '@/lib/db';
 
 const links = [
   {
@@ -36,6 +38,25 @@ const links = [
 const UserProfile = () => {
   const router = useRouter();
   const { userid } = router.query;
+  
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (userid) {
+      getUserByUsername(userid)
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+            setUser(doc.data());
+        });
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [userid]);
+
   return (
     <Flex
       width="100%"
@@ -55,15 +76,15 @@ const UserProfile = () => {
         <Flex p={1} minH="100vh" direction="column" alignItems="center" py={16}>
           <Avatar
             size="xl"
-            name="Selena Gomez"
-            src="https://d1fdloi71mui9q.cloudfront.net/OpRYQ3AXTQoZYncuWhh6_Qyl0MvMh6e5eIoI0"
+            name={user?.name}
+            src={user?.photoUrl}
           />
           <Heading size="lg" mt={2} color="gray.800">
-            Selena Gomez
+            {user?.name}
           </Heading>
-          <Text color="gray.600">@selenagomez</Text>
+          <Text color="gray.600">@{userid}</Text>
           <Flex direction="column" width={['85%', '70%']} mt={12}>
-            {links.map((link) => (
+            {user?.links.map((link) => (
               <Link
                 key={link.id}
                 href={link.href}

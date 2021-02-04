@@ -15,14 +15,24 @@ import DashboardShell from '@/components/DashboardShell';
 import DraggableLinks from '@/components/DraggableLinks';
 import DashboardSkeleton from '@/components/Skeleton/DashboardSkeleton';
 import { useAuth } from '@/lib/auth';
-import { updateLinks } from '@/lib/db';
-
+import { getLinks, updateLinks } from '@/lib/db';
 
 const Dashboard = () => {
   const [state, setState] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const auth = useAuth();
   const toast = useToast();
+
+  useEffect(() => {
+    // console.log(auth?.user?.uid)
+    if (auth?.user?.uid) {
+      getLinks(auth?.user?.uid).then((doc) => {
+        const { links } = doc.data();
+        console.log(links);
+        setState(links);
+      });
+    }
+  }, [auth]);
 
   return (
     <DashboardShell>
@@ -49,40 +59,42 @@ const Dashboard = () => {
             >
               Add New Link
             </Button>
-            <Button
-              variant="outline"
-              mb={[2, 6]}
-              isLoading={submitting}
-              onClick={() => {
-                setSubmitting(true);
-                updateLinks(auth.user.uid, state)
-                  .then(() => {
-                    console.log('Success');
-                    toast({
-                      title: 'Sucess.',
-                      description: 'Your links saved successfully.',
-                      status: 'success',
-                      duration: 9000,
-                      isClosable: true
+            {state.length !== 0 && (
+              <Button
+                variant="outline"
+                mb={[2, 6]}
+                isLoading={submitting}
+                onClick={() => {
+                  setSubmitting(true);
+                  updateLinks(auth.user.uid, state)
+                    .then(() => {
+                      console.log('Success');
+                      toast({
+                        title: 'Sucess.',
+                        description: 'Your links saved successfully.',
+                        status: 'success',
+                        duration: 9000,
+                        isClosable: true
+                      });
+                      setSubmitting(false);
+                    })
+                    .catch((err) => {
+                      console.log('Something went wrong!');
                     });
-                    setSubmitting(false);
-                  })
-                  .catch((err) => {
-                    console.log('Something went wrong!');
-                  });
-              }}
-            >
-              Save
-            </Button>
+                }}
+              >
+                Save
+              </Button>
+            )}
           </Flex>
         )}
 
-        {/* <Stack spacing={8} my={12}>
+        {state.length == 0 && <Stack spacing={8} my={12}>
           <Image src="/assets/undraw_city_life.svg" />
           <Heading size="md" px={[12]} textAlign="center">
             Seems like you have not created any links yet.
           </Heading>
-        </Stack> */}
+        </Stack>}
         <Box>
           <DraggableLinks state={state} setState={setState} />
         </Box>

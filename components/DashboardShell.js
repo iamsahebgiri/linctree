@@ -108,10 +108,10 @@ const DashboardShell = (props) => {
             <Link
               fontSize="sm"
               color="gray.600"
-              href="https://chakra-ui.com"
+              href={`/${auth?.user?.username}`}
               isExternal
             >
-              https://linctree.now.sh/iamsahebgiri
+              https://linctree.now.sh/{auth?.user?.username}
               <Icon as={HiOutlineExternalLink} mx="6px" />
             </Link>
             <Button
